@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-wrapper animate-fade-in">
+    <div class="auth-card">
+        <div class="auth-card-header">
+            <h2>Create Account</h2>
+            <p>Join us to start taking smart, AI-powered notes</p>
+        </div>
+        <form method="POST" action="" class="auth-form" novalidate>
+            <!-- CSRF Protection Token -->
+            {{ form.csrf_token }}
+            
+            <div class="form-group">
+                {{ form.email.label(class="form-label") }}
+                <div class="input-container">
+                    <span class="input-icon-left"><i class="fa-solid fa-envelope"></i></span>
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-input is-invalid", placeholder="you@example.com") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span><i class="fa-solid fa-triangle-exclamation"></i> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-input", placeholder="you@example.com") }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }}
+                <div class="input-container">
+                    <span class="input-icon-left"><i class="fa-solid fa-lock"></i></span>
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-input is-invalid", placeholder="At least 8 characters") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span><i class="fa-solid fa-triangle-exclamation"></i> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-input", placeholder="At least 8 characters") }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-label") }}
+                <div class="input-container">
+                    <span class="input-icon-left"><i class="fa-solid fa-shield-halved"></i></span>
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-input is-invalid", placeholder="Repeat your password") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span><i class="fa-solid fa-triangle-exclamation"></i> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-input", placeholder="Repeat your password") }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-action">
+                {{ form.submit(class="btn btn-primary btn-block") }}
+            </div>
+        </form>
+        <div class="auth-card-footer">
+            <p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

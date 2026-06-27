@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="workspace-layout animate-fade-in">
+    <!-- Sidebar Controls -->
+    <aside class="workspace-sidebar">
+        <div class="sidebar-section">
+            <span class="sidebar-label">Navigation</span>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="{{ url_for('main.dashboard') }}">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        <span>My Notes</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <span class="sidebar-label">AI Smart Suite</span>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="{{ url_for('main.ai_summarizer') }}">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>AI Summarizer</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{ url_for('main.quizzes') }}">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <span>Quiz Generator</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <span class="sidebar-label">Preferences</span>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="#" class="theme-toggle-trigger" onclick="return false;">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <span>Theme Toggle</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Workspace Console -->
+    <section class="workspace-console">
+        <div class="console-header">
+            <div>
+                <h1>AI Quiz Center</h1>
+                <p class="console-subtitle">Test your retention and review practice quizzes generated from your notes</p>
+            </div>
+        </div>
+
+        <!-- Metrics Overview Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card glassmorphism">
+                <div class="metric-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="metric-info">
+                    <span class="metric-title">Quizzes Active</span>
+                    <span class="metric-value">{{ quizzes }}</span>
+                </div>
+            </div>
+            <div class="metric-card glassmorphism">
+                <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="metric-info">
+                    <span class="metric-title">Pending Notes</span>
+                    <span class="metric-value">{{ notes_without_quiz | length }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-workspace-area">
+            <h2>Active Quizzes</h2>
+            {% if notes_with_quiz %}
+                <div class="notes-grid" style="margin-top: 1rem; margin-bottom: 2rem;">
+                    {% for note in notes_with_quiz %}
+                        <div class="note-card glassmorphism" style="min-height: 180px; justify-content: space-between;">
+                            <div class="note-card-header">
+                                <h3 class="note-title">{{ note.title }}</h3>
+                                <span class="note-date"><i class="fa-solid fa-calendar-day"></i> {{ note.updated_at.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fa-solid fa-circle-question" style="color: var(--accent-primary);"></i>
+                                <span>3 Multiple Choice Questions Ready</span>
+                            </div>
+                            <div class="note-card-actions" style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                                <a href="{{ url_for('main.view_quiz', note_id=note.id) }}" class="note-action-btn view-btn" style="width: 100%; text-align: center; justify-content: center;">
+                                    <i class="fa-solid fa-play"></i> Start Practice Quiz
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state-card glassmorphism animate-slide-in" style="margin-top: 1rem; margin-bottom: 2rem; padding: 2rem;">
+                    <div class="empty-icon-wrapper" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+                    <h3 style="font-size: 1.1rem; margin-top: 0.5rem;">No active quizzes</h3>
+                    <p style="font-size: 0.85rem;">Generate quizzes for your notes to test your understanding here.</p>
+                </div>
+            {% endif %}
+
+            <h2>Pending Quizzes</h2>
+            {% if notes_without_quiz %}
+                <div class="notes-grid" style="margin-top: 1rem;">
+                    {% for note in notes_without_quiz %}
+                        <div class="note-card glassmorphism" style="justify-content: space-between; min-height: auto; padding: 1.25rem;">
+                            <div class="note-card-header">
+                                <h3 class="note-title" style="font-size: 1.05rem;">{{ note.title }}</h3>
+                                <span class="note-date" style="font-size: 0.7rem;"><i class="fa-solid fa-calendar-day"></i> Edited: {{ note.updated_at.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                                <a href="{{ url_for('main.view_note', note_id=note.id) }}" class="btn btn-primary btn-sm" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                                    <i class="fa-solid fa-feather-pointed"></i> Generate Quiz
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state-card glassmorphism animate-slide-in" style="margin-top: 1rem; padding: 1.5rem; border: 1px dashed var(--border-color);">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">🎉 Quizzes generated for all notes! No notes pending.</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
