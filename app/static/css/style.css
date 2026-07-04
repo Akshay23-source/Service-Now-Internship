@@ -1655,4 +1655,66 @@ body.light-theme .quiz-score-card {
     background-color: var(--bg-card);
 }
 
+/* ==========================================================================
+   Arrow & Icon Micro-Animations
+   Adds premium interactive transitions to linear and circular icons on hover
+   ========================================================================== */
+
+/* 1. Linear Left-Pointing Arrows/Chevrons (slide left) */
+.back-link,
+.sidebar-links li a {
+    position: relative;
+}
+
+.back-link i.fa-chevron-left,
+.back-link i.fa-arrow-left,
+.sidebar-links li a i.fa-chevron-left,
+.sidebar-links li a i.fa-arrow-left {
+    transition: transform var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.back-link:hover i.fa-chevron-left,
+.back-link:hover i.fa-arrow-left,
+.sidebar-links li a:hover i.fa-chevron-left,
+.sidebar-links li a:hover i.fa-arrow-left {
+    transform: translateX(-5px);
+}
+
+/* 2. Linear Right-Pointing Arrows/Chevrons (slide right) */
+.btn i.fa-chevron-right,
+.btn i.fa-arrow-right,
+.note-action-btn i.fa-chevron-right,
+.note-action-btn i.fa-arrow-right {
+    transition: transform var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.btn:hover i.fa-chevron-right,
+.btn:hover i.fa-arrow-right,
+.note-action-btn:hover i.fa-chevron-right,
+.note-action-btn:hover i.fa-arrow-right {
+    transform: translateX(5px);
+}
+
+/* 3. Circular/Rotate Arrows (spin / rotate) */
+.btn i.fa-rotate,
+.btn i.fa-arrow-rotate-left,
+.summary-regen-btn i.fa-rotate,
+.summary-regen-btn i.fa-arrow-rotate-left,
+.note-action-btn i.fa-rotate,
+.note-action-btn i.fa-arrow-rotate-left {
+    transition: transform var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.btn:hover i.fa-rotate,
+.btn:hover i.fa-arrow-rotate-left,
+.summary-regen-btn:hover i.fa-rotate,
+.summary-regen-btn:hover i.fa-arrow-rotate-left,
+.note-action-btn:hover i.fa-rotate,
+.note-action-btn:hover i.fa-arrow-rotate-left {
+    transform: rotate(-180deg);
+}
+
 

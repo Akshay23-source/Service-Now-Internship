@@ -36,5 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', theme);
         });
     }
+
+    // Form submission loading state handler
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            // Find submit button
+            const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+            if (submitBtn) {
+                const icon = submitBtn.querySelector('i');
+                if (icon) {
+                    icon.className = 'fa-solid fa-spinner fa-spin';
+                }
+            }
+        });
+    });
 });
 
