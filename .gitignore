@@ -19,3 +19,6 @@ env/
 # Database
 *.db
 instance/
+
+# Logs
+logs/
