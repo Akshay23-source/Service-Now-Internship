@@ -11,9 +11,11 @@ class Config:
     """Base configuration class containing application settings."""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'default-fallback-key-should-be-changed'
     
-    # Store SQLite database in an 'instance' folder (standard Flask project structure)
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    # Store SQLite database in /tmp on Vercel (read-only filesystem workaround) or local 'instance' folder
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or (
+        'sqlite:////tmp/notes.db' if os.environ.get('VERCEL') == '1' else
         'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'notes.db')
+    )
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     

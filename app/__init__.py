@@ -34,14 +34,23 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     csrf.init_app(app)
 
-    # Configure Rotating File Logging
-    os.makedirs('logs', exist_ok=True)
-    file_handler = RotatingFileHandler('logs/smartnotes.log', maxBytes=100000, backupCount=5)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-    ))
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
+    # Configure Logging: stdout for Vercel, rotating files for local
+    if os.environ.get('VERCEL') == '1':
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s'
+        ))
+        stream_handler.setLevel(logging.INFO)
+        app.logger.addHandler(stream_handler)
+    else:
+        os.makedirs('logs', exist_ok=True)
+        file_handler = RotatingFileHandler('logs/smartnotes.log', maxBytes=100000, backupCount=5)
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+        ))
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
+
     app.logger.setLevel(logging.INFO)
     app.logger.info('SmartNotes Pro application initialized successfully.')
 
