@@ -197,6 +197,17 @@ Through this internship, I developed a strong understanding of:
 Final Year Computer Science Engineering Student
 
 GitHub: https://github.com/Akshay23-source
+youtube links -
+Day1-https://youtu.be/a1Ohmacmj7U?si=ePkOL3mCY9p-boZv
+Day2-https://youtu.be/Ltyo4tQST5M?si=lWMIi8Vr9N91LhHx
+Day3-https://youtu.be/Y6n2o0T-ZUM?si=CowXLG_x91xHoQBI
+Day4-https://youtu.be/vQ0R_lI5Zv8?si=KQWloM1YlGD8pIKQ
+Day5-https://youtu.be/utuqK8245Kk?si=OlD2jjZm_8TdqDA9
+Day6-https://youtu.be/StA0BC0agP0?si=O7382NiOlj9Pcsmx
+Day7-https://youtu.be/nbtT0L7bTaI?si=Mp-diqNMiYU2IMTX
+Day8-https://youtu.be/lwJ2mN90yTw?si=wQQl2-5_oLZOjtu7
+Day9-https://youtu.be/CdCUoq2GTwI?si=KweFX08CN1MFPpzA
+Day10-https://youtu.be/2vnaQC4JGEY?si=EF4BWregMb6vvn5n
 
 
 
